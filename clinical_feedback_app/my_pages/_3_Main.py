@@ -61,7 +61,7 @@ Here is the interview transcript (File 3):
 {file3_text}
 \"\"\"
 
-For each of the categories, list feedback as:
+For each of the 3 categories in the clincial note (History, Physical Examination and diagnostics, Datra Interpretation), list feedback as:
 a) Strengths,
 b) Areas for Improvement,
 c) Suggestions.
