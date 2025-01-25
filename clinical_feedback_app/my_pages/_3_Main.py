@@ -49,26 +49,26 @@ def main_page():
             This is based on the attached patient case profile (OnDoc Case 01.txt). For each of the categories, 
             list feedback as:
             a) Strengths,
-            b) Areas for Improvement, and
+            b) Areas for Improvement,
             c) Suggestions. 
-
+            
             Be very detailed in your feedback.
-
+            
             Next, provide constructive feedback about the interview that this student conducted with this patient. 
             The interview transcript is attached (Case 01 transcript.txt). Provide feedback especially on the 
             information gathered to establish a comprehensive differential diagnosis. 
-
+            
             List feedback as:
             a) Strengths,
-            b) Areas for Improvement, and
+            b) Areas for Improvement,
             c) Suggestions. 
-
+            
             Be very detailed in your feedback.
             """
 
             # Use the new openai>=1.0.0 method
             with st.spinner("Generating feedback..."):
-                response = openai.ChatCompletion.create(
+                response = openai.chat.completions.create(
                     model="gpt-4",
                     messages=[
                         {
