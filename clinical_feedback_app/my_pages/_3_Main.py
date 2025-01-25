@@ -40,11 +40,30 @@ def main_page():
             file2_text = extract_text_from_file(file2)
             file3_text = extract_text_from_file(file3)
 
-            # Define the specific prompt
+            # Construct the prompt
             prompt = """
-            You are an experienced medical educator and course director at a US medical school teaching medical students in the preclerkship phase of the MD program. One of your major goals is to prepare students for the USMLE STEP 1 exam.
-            Your goal is to assess, evaluate and provide constructive formative feedback on the clinical note written by a medical student. The clinical note is attached (Case 01 writeup.txt). This is based on the attached patient case profile (OnDoc Case 01.txt). For each of the categories, list feedback as a) Strengths, b) Areas for Improvement, and c) Suggestions. Be very detailed in your feedback.
-            Next, provide constructive feedback about the interview that this student conducted with this patient. The interview transcript is attached (Case 01 transcript.txt). Provide feedback especially on the information gathered to establish a comprehensive differential diagnosis. List feedback as a) Strengths, b) Areas for Improvement, and c) Suggestions. Be very detailed in your feedback.
+            You are teaching medical students in the preclerkship phase of the MD program.  
+            One of your major goals is to prepare students for the USMLE STEP 1 exam.
+            Your goal is to assess, evaluate, and provide constructive formative feedback on 
+            the clinical note written by a medical student. The clinical note is attached (Case 01 writeup.txt). 
+            This is based on the attached patient case profile (OnDoc Case 01.txt). For each of the categories, 
+            list feedback as:
+            a) Strengths,
+            b) Areas for Improvement, and
+            c) Suggestions. 
+
+            Be very detailed in your feedback.
+
+            Next, provide constructive feedback about the interview that this student conducted with this patient. 
+            The interview transcript is attached (Case 01 transcript.txt). Provide feedback especially on the 
+            information gathered to establish a comprehensive differential diagnosis. 
+
+            List feedback as:
+            a) Strengths,
+            b) Areas for Improvement, and
+            c) Suggestions. 
+
+            Be very detailed in your feedback.
             """
 
             # Use the new openai>=1.0.0 method
@@ -52,7 +71,10 @@ def main_page():
                 response = openai.ChatCompletion.create(
                     model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are ChatGPT, a large language model trained by OpenAI."},
+                        {
+                            "role": "system",
+                            "content": "You are an experienced medical educator and course director at a US medical school"
+                        },
                         {"role": "user", "content": prompt}
                     ],
                     max_tokens=1500,
@@ -80,7 +102,6 @@ def main_page():
                     file_name=pdf_file_name,
                     mime="application/pdf"
                 )
-
 
     # --- NEW / UPDATED SECTION ---
     st.markdown("### Previous Feedback")
