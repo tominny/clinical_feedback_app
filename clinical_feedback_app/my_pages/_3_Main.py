@@ -40,23 +40,24 @@ def main_page():
             file2_text = extract_text_from_file(file2)
             file3_text = extract_text_from_file(file3)
 
-            # Construct the prompt
-            prompt = f"""
-You are an experienced medical educator...
-(Your long prompt text here)...
+            # Define the specific prompt
+prompt = """
+You are an experienced medical educator and course director at a US medical school teaching medical students in the preclerkship phase of the MD program. One of your major goals is to prepare students for the USMLE STEP 1 exam.
+Your goal is to assess, evaluate and provide constructive formative feedback on the clinical note written by a medical student. The clinical note is attached (Case 01 writeup.txt). This is based on the attached patient case profile (OnDoc Case 01.txt). For each of the categories, list feedback as a) Strengths, b) Areas for Improvement, and c) Suggestions. Be very detailed in your feedback.
+Next, provide constructive feedback about the interview that this student conducted with this patient. The interview transcript is attached (Case 01 transcript.txt). Provide feedback especially on the information gathered to establish a comprehensive differential diagnosis. List feedback as a) Strengths, b) Areas for Improvement, and c) Suggestions. Be very detailed in your feedback.
 """
 
-            # Use the new openai>=1.0.0 method
-            with st.spinner("Generating feedback..."):
-                response = openai.chat.completions.create(
-                    model="gpt-4",
-                    messages=[
-                        {"role": "system", "content": "You are ChatGPT..."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    max_tokens=1500,
-                    temperature=0.7
-                )
+# Use the new openai>=1.0.0 method
+with st.spinner("Generating feedback..."):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are ChatGPT, a large language model trained by OpenAI."},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=1500,
+        temperature=0
+    )
 
             feedback_text = response.choices[0].message.content
             st.session_state["feedback"] = feedback_text
