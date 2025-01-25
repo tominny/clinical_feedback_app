@@ -40,31 +40,40 @@ def main_page():
             file2_text = extract_text_from_file(file2)
             file3_text = extract_text_from_file(file3)
 
-            # Construct the prompt
-            prompt = """
-            You are teaching medical students in the preclerkship phase of the MD program.  
-            One of your major goals is to prepare students for the USMLE STEP 1 exam.
-            Your goal is to assess, evaluate, and provide constructive formative feedback on 
-            the clinical note written by a medical student. The clinical note is attached (Case 01 writeup.txt). 
-            This is based on the attached patient case profile (OnDoc Case 01.txt). For each of the categories, 
-            list feedback as:
-            a) Strengths,
-            b) Areas for Improvement,
-            c) Suggestions. 
-            
-            Be very detailed in your feedback.
-            
-            Next, provide constructive feedback about the interview that this student conducted with this patient. 
-            The interview transcript is attached (Case 01 transcript.txt). Provide feedback especially on the 
-            information gathered to establish a comprehensive differential diagnosis. 
-            
-            List feedback as:
-            a) Strengths,
-            b) Areas for Improvement,
-            c) Suggestions. 
-            
-            Be very detailed in your feedback.
-            """
+            # (CHANGED HERE) Construct the prompt, including the file contents
+            prompt = f"""
+You are teaching medical students in the preclerkship phase of the MD program. 
+Your goal is to assess, evaluate, and provide constructive formative feedback on the clinical note,
+based on the patient case file, and also give feedback on the student's interview approach.
+
+Here is the student's clinical note (File 1):
+\"\"\"
+{file1_text}
+\"\"\"
+
+Here is the patient case file (File 2):
+\"\"\"
+{file2_text}
+\"\"\"
+
+Here is the interview transcript (File 3):
+\"\"\"
+{file3_text}
+\"\"\"
+
+For each of the categories, list feedback as:
+a) Strengths,
+b) Areas for Improvement,
+c) Suggestions.
+Be very detailed in your feedback.
+
+Then provide constructive feedback about how the interview was conducted and the info gathered.
+Again, list:
+a) Strengths,
+b) Areas for Improvement,
+c) Suggestions.
+Be very detailed.
+"""
 
             # Use the new openai>=1.0.0 method
             with st.spinner("Generating feedback..."):
@@ -73,7 +82,7 @@ def main_page():
                     messages=[
                         {
                             "role": "system",
-                            "content": "You are an experienced medical educator and course director at a US medical school"
+                            "content": "You are an experienced medical educator and course director at a US medical school."
                         },
                         {"role": "user", "content": prompt}
                     ],
@@ -103,7 +112,7 @@ def main_page():
                     mime="application/pdf"
                 )
 
-    # --- NEW / UPDATED SECTION ---
+    # Previous Feedback
     st.markdown("### Previous Feedback")
     previous_uploads = db.get_user_uploads(user_id)
     for upload in previous_uploads:
