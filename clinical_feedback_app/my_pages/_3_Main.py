@@ -45,7 +45,7 @@ def main_page():
 You are teaching medical students in the preclerkship phase of the MD program. 
 Your goal is to assess, evaluate, and provide constructive formative feedback on the clinical note,
 based on the patient case file, and also give feedback on the student's interview approach.
-
+Be supportive yet demand excellence.
 Here is the student's clinical note (File 1):
 \"\"\"
 {file1_text}
