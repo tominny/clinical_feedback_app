@@ -1,0 +1,8 @@
+In Acando Power Shell Prompt:
+
+cd "C:\Users\f006q7g\OneDrive - Dartmouth College\Research\MedEdResearch\AI in Education\OnDoc\code\my_clinical_feedback_app"
+
+
+pip install -r requirements.txt
+
+streamlit run app.py
