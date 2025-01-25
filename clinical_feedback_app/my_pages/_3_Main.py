@@ -78,7 +78,7 @@ Be very detailed.
             # Use the new openai>=1.0.0 method
             with st.spinner("Generating feedback..."):
                 response = openai.chat.completions.create(
-                    model="gpt-4",
+                    model="gpt-4o",
                     messages=[
                         {
                             "role": "system",
