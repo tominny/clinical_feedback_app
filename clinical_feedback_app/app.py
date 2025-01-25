@@ -21,7 +21,7 @@ def main():
     # 2) Build the sidebar radio using the current choice
     choice = st.sidebar.radio(
         "Go to",
-        ["Login", "Sign Up", "**Get Feedback**"],
+        ["Login", "Sign Up", "Main"],
         index=["Login", "Sign Up", "Main"].index(st.session_state["choice"])
     )
     # Update session state with the new sidebar selection
@@ -34,7 +34,7 @@ def main():
     elif choice == "Sign Up":
         import my_pages._2_Signup as _2_Signup
         _2_Signup.run()
-    elif choice == "**Get Feedback**":
+    elif choice == "Main":
         import my_pages._3_Main as _3_Main
         _3_Main.run()
 
