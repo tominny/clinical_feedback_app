@@ -89,7 +89,7 @@ def main_page():
             """
             with st.spinner("Studying the case. Reading your note. Thinking about what you wrote..."):
                 response = openai.chat.completions.create(
-                    model="gpt-4",
+                    model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "You are an experienced medical educator preparing medical students for STEP 1 and clincial rotations."},
                         {"role": "user", "content": prompt}
