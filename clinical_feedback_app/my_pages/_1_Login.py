@@ -3,6 +3,14 @@ from db.db_manager import DBManager
 from utils.security import check_password
 
 def login_page():
+    # Add clickable logo at top
+    st.markdown(
+        """
+        [![NILE Lab logo](../images/NILE_Lab.jpg)](https://geiselmed.dartmouth.edu/thesen/)
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("Login")
 
     username = st.text_input("Username")
@@ -25,18 +33,7 @@ def login_page():
                 st.session_state["user_id"] = user["user_id"]
                 st.session_state["username"] = user["username"]
                 st.success("Logged in successfully!")
-
-                # Switch to "Main" and force a page reload (JavaScript)
-                st.session_state["choice"] = "Main"
-                st.write(
-                    """
-                    <script>
-                    window.location.reload();
-                    </script>
-                    """,
-                    unsafe_allow_html=True
-                )
-
+                # Optionally jump to Main page if you wish
             else:
                 st.error("Invalid username or password.")
         else:
@@ -44,7 +41,6 @@ def login_page():
 
 def run():
     if "logged_in" in st.session_state and st.session_state["logged_in"]:
-        st.write("You are already logged in.")
-        st.write("Go to the Main page from the sidebar.")
+        st.write("You are already logged in. Go to the Main page from the sidebar.")
     else:
         login_page()
