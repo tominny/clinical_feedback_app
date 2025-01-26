@@ -1,17 +1,18 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 25 11:00:36 2025
-
-@author: f006q7g
-"""
-
-# pages/2_Signup.py
 import streamlit as st
 from db.db_manager import DBManager
 from utils.security import hash_password
 
 def signup_page():
+    # Add clickable logo at top
+    st.markdown(
+        """
+        [![NILE Lab logo](../images/NILE_Lab.jpg)](https://geiselmed.dartmouth.edu/thesen/)
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("Sign Up")
+
     username = st.text_input("Choose a Username")
     password = st.text_input("Choose a Password", type="password")
     confirm_password = st.text_input("Confirm Password", type="password")
@@ -36,7 +37,7 @@ def signup_page():
         if user:
             st.error("Username already exists, choose another.")
             return
-        
+
         hashed_pw = hash_password(password)
         db.insert_user(username, hashed_pw)
         st.success("Account created successfully! Go to the Login page.")
