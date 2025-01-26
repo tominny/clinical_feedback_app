@@ -63,33 +63,34 @@ def main_page():
 
             # Example prompt that includes the file texts
             prompt = f"""
-            You are assessing a year 1 medical student case write-up. Evaluate, and provide constructive 
+            You are assessing a year 1 medical student case write-up and their clinical reasoning and differential diagnosis. 
+            Evaluate, and provide constructive 
             formative feedback on the clinical note, based on the history, physical exam, and test data 
-            provided in the patient case file, and also give feedback on the student's interview approach 
-            in terms of flow, relevant questions asked based on the Chief Concern, thoroughness of the other 
+            provided in the patient case file. Seperately, give feedback on the student's interview approach 
+            in terms of flow, relevant questions asked based on the Chief Concern and differential diagnosis, thoroughness of the other 
             relevant portions of the history gathered, and display of verbal empathy. Be supportive yet 
             demand excellence.
-            File 1:
+            CLinical Note written by the student:
             \"\"\"
             {file1_text}
             \"\"\"
-            File 2:
+            Patient case file:
             \"\"\"
             {file2_text}
             \"\"\"
-            File 3:
+            Transcript of the student-patient clinical encounter:
             \"\"\"
             {file3_text}
             \"\"\"
-            For each of the 3 categories in the clincial note (History, Physical Examination and diagnostics, Datra Interpretation), 
+            For each of the 3 categories in the clincial note (1. History, 2.Physical Examination and diagnostics, 3. Datra Interpretation), 
             list feedback as: a) Strengths, b) Areas for Improvement, c) Suggestions. Be very detailed in your feedback.
-            For each point you make in 'Areas for Improvement', explain why this is relevant ot the patient.
+            For each critique you make in 'Areas for Improvement', explain why this is relevant to this patient's presentation.
             """
             with st.spinner("Studying the case. Reading your note. Thinking about what you wrote..."):
                 response = openai.chat.completions.create(
                     model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are an experienced medical educator."},
+                        {"role": "system", "content": "You are an experienced medical educator preparing medical students for STEP 1 and clincial rotations."},
                         {"role": "user", "content": prompt}
                     ],
                     max_tokens=1500,
