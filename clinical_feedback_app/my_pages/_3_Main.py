@@ -85,7 +85,7 @@ def main_page():
             list feedback as: a) Strengths, b) Areas for Improvement, c) Suggestions. Be very detailed in your feedback.
             For each point you make in 'Areas for Improvement', explain why this is relevant ot the patient.
             """
-            with st.spinner("Generating feedback..."):
+            with st.spinner("Studying the case. Reading your note. Thinking about what you wrote..."):
                 response = openai.chat.completions.create(
                     model="gpt-4",
                     messages=[
