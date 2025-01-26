@@ -7,6 +7,7 @@ import os
 def show_logo():
     this_file_dir = os.path.dirname(__file__)
     logo_path = os.path.join(this_file_dir, "..", "images", "NILE_Lab.jpg")
+
     with open(logo_path, "rb") as f:
         logo_data = f.read()
     encoded = base64.b64encode(logo_data).decode()
@@ -23,7 +24,8 @@ def show_logo():
     )
 
 def signup_page():
-    show_logo()  # display the logo at top
+    # Show the clickable logo at the top
+    show_logo()
 
     st.title("Sign Up")
     username = st.text_input("Choose a Username")
@@ -39,8 +41,22 @@ def signup_page():
     )
 
     if st.button("Sign Up"):
-        # ... your signup logic ...
-        pass
+        if not username or not password or not confirm_password:
+            st.error("Please fill out all fields.")
+            return
+        if password != confirm_password:
+            st.error("Passwords do not match.")
+            return
+
+        # Check if username already exists
+        user = db.get_user_by_username(username)
+        if user:
+            st.error("Username already exists, choose another.")
+            return
+
+        hashed_pw = hash_password(password)
+        db.insert_user(username, hashed_pw)
+        st.success("Account created successfully! Go to the Login page.")
 
 def run():
     signup_page()
