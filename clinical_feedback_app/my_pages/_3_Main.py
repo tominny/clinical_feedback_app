@@ -63,7 +63,12 @@ def main_page():
 
             # Example prompt that includes the file texts
             prompt = f"""
-            You are teaching medical students ...
+            You are assessing a year 1 medical student case write-up. Evaluate, and provide constructive 
+            formative feedback on the clinical note, based on the history, physical exam, and test data 
+            provided in the patient case file, and also give feedback on the student's interview approach 
+            in terms of flow, relevant questions asked based on the Chief Concern, thoroughness of the other 
+            relevant portions of the history gathered, and display of verbal empathy. Be supportive yet 
+            demand excellence.
             File 1:
             \"\"\"
             {file1_text}
@@ -76,6 +81,9 @@ def main_page():
             \"\"\"
             {file3_text}
             \"\"\"
+            For each of the 3 categories in the clincial note (History, Physical Examination and diagnostics, Datra Interpretation), 
+            list feedback as: a) Strengths, b) Areas for Improvement, c) Suggestions. Be very detailed in your feedback.
+            Then provide constructive feedback about how the interview was conducted and the info gathered.
             """
             with st.spinner("Generating feedback..."):
                 response = openai.chat.completions.create(
