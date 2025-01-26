@@ -1,12 +1,17 @@
 import streamlit as st
-import openai
 from db.db_manager import DBManager
 from utils.security import check_password
 import base64
+import os
 
 def show_logo():
+    # Get the absolute path to THIS file's directory (my_pages/)
+    this_file_dir = os.path.dirname(__file__)  
+    # Move one level up (..) to the parent folder, then into images/
+    logo_path = os.path.join(this_file_dir, "..", "images", "NILE_Lab.jpg")
+
     # Read the local image file as bytes
-    with open("images/NILE_Lab.jpg", "rb") as f:
+    with open(logo_path, "rb") as f:
         logo_data = f.read()
     # Encode to base64
     encoded = base64.b64encode(logo_data).decode()
@@ -15,8 +20,8 @@ def show_logo():
     st.markdown(
         f"""
         <a href="https://geiselmed.dartmouth.edu/thesen/" target="_blank">
-            <img src="data:image/jpg;base64,{encoded}" 
-                 alt="NILE Lab Logo" 
+            <img src="data:image/jpg;base64,{encoded}"
+                 alt="NILE Lab Logo"
                  style="width: 150px;" />
         </a>
         """,
@@ -24,8 +29,7 @@ def show_logo():
     )
 
 def login_page():
-    # Show the clickable logo at the top
-    show_logo()
+    show_logo()  # Show the clickable logo at the top
 
     st.title("Login")
 
