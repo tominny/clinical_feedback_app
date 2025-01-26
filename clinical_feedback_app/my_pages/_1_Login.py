@@ -5,18 +5,19 @@ import base64
 import os
 
 def show_logo():
-    # Get the absolute path to THIS file's directory (my_pages/)
-    this_file_dir = os.path.dirname(__file__)  
-    # Move one level up (..) to the parent folder, then into images/
+    # Get the current file's directory (my_pages/)
+    this_file_dir = os.path.dirname(__file__)
+    # Build a path to go one folder up (..) and into images/
     logo_path = os.path.join(this_file_dir, "..", "images", "NILE_Lab.jpg")
 
-    # Read the local image file as bytes
+    # Read the logo as bytes
     with open(logo_path, "rb") as f:
         logo_data = f.read()
-    # Encode to base64
+
+    # Base64-encode the logo
     encoded = base64.b64encode(logo_data).decode()
 
-    # Create a clickable image linking to the given URL
+    # Create a clickable HTML image that links to the URL
     st.markdown(
         f"""
         <a href="https://geiselmed.dartmouth.edu/thesen/" target="_blank">
@@ -29,7 +30,8 @@ def show_logo():
     )
 
 def login_page():
-    show_logo()  # Show the clickable logo at the top
+    # Show the clickable logo at the top
+    show_logo()
 
     st.title("Login")
 
@@ -53,6 +55,7 @@ def login_page():
                 st.session_state["user_id"] = user["user_id"]
                 st.session_state["username"] = user["username"]
                 st.success("Logged in successfully!")
+                # Optionally redirect to Main if needed
             else:
                 st.error("Invalid username or password.")
         else:
