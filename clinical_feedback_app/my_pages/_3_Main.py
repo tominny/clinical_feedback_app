@@ -7,14 +7,17 @@ import os
 import base64
 
 def show_logo():
-    with open("images/NILE_Lab.jpg", "rb") as f:
+    this_file_dir = os.path.dirname(__file__)
+    logo_path = os.path.join(this_file_dir, "..", "images", "NILE_Lab.jpg")
+    with open(logo_path, "rb") as f:
         logo_data = f.read()
     encoded = base64.b64encode(logo_data).decode()
+
     st.markdown(
         f"""
         <a href="https://geiselmed.dartmouth.edu/thesen/" target="_blank">
-            <img src="data:image/jpg;base64,{encoded}" 
-                 alt="NILE Lab Logo" 
+            <img src="data:image/jpg;base64,{encoded}"
+                 alt="NILE Lab Logo"
                  style="width: 150px;" />
         </a>
         """,
@@ -22,33 +25,10 @@ def show_logo():
     )
 
 def main_page():
-    # Show the logo on top
-    show_logo()
+    show_logo()  # display the logo
 
     st.title("Clinical Note Feedback")
-
-    openai.api_key = st.secrets["openai"]["api_key"]
-
-    db = DBManager(
-        host=st.secrets["database"]["host"],
-        database=st.secrets["database"]["database"],
-        user=st.secrets["database"]["user"],
-        password=st.secrets["database"]["password"],
-        port=st.secrets["database"]["port"]
-    )
-
-    if "logged_in" not in st.session_state or not st.session_state["logged_in"]:
-        st.warning("Please log in first.")
-        return
-
-    user_id = st.session_state["user_id"]
-
-    # Upload logic, generate feedback logic, etc.
-    st.markdown("### Upload Your Files")
-    file1 = st.file_uploader("Upload File 1", type=["pdf", "docx", "txt"])
-    file2 = st.file_uploader("Upload File 2", type=["pdf", "docx", "txt"])
-    file3 = st.file_uploader("Upload File 3", type=["pdf", "docx", "txt"])
-    ...
+    # ... the rest of your code ...
 
 def run():
     main_page()
