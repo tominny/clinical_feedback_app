@@ -84,7 +84,7 @@ def main_page():
             \"\"\"
             For each of the 3 categories in the clincial note (1. History, 2.Physical Examination and diagnostics, 3. Datra Interpretation), 
             list feedback as: a) Strengths, b) Areas for Improvement, c) Suggestions. Be very detailed in your feedback.
-            For each critique you make in 'Areas for Improvement', explain why this is relevant to this patient's presentation.
+            Always explain the clinical reasoning behind your statements and feedback.
             """
             with st.spinner("Studying the case. Reading your note. Thinking about what you wrote..."):
                 response = openai.chat.completions.create(
