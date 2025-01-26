@@ -69,7 +69,7 @@ def main_page():
             provided in the patient case file. Seperately, give feedback on the student's interview approach 
             in terms of flow, relevant questions asked based on the Chief Concern and differential diagnosis, thoroughness of the other 
             relevant portions of the history gathered, and display of verbal empathy. Be supportive yet 
-            demand excellence.
+            demand excellence. Address the student in the first-person.
             CLinical Note written by the student:
             \"\"\"
             {file1_text}
