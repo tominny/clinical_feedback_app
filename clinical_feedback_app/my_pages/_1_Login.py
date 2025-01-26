@@ -1,15 +1,31 @@
 import streamlit as st
+import openai
 from db.db_manager import DBManager
 from utils.security import check_password
+import base64
 
-def login_page():
-    # Add clickable logo at top
+def show_logo():
+    # Read the local image file as bytes
+    with open("images/NILE_Lab.jpg", "rb") as f:
+        logo_data = f.read()
+    # Encode to base64
+    encoded = base64.b64encode(logo_data).decode()
+
+    # Create a clickable image linking to the given URL
     st.markdown(
-        """
-        [![NILE Lab logo](../images/NILE_Lab.jpg)](https://geiselmed.dartmouth.edu/thesen/)
+        f"""
+        <a href="https://geiselmed.dartmouth.edu/thesen/" target="_blank">
+            <img src="data:image/jpg;base64,{encoded}" 
+                 alt="NILE Lab Logo" 
+                 style="width: 150px;" />
+        </a>
         """,
         unsafe_allow_html=True
     )
+
+def login_page():
+    # Show the clickable logo at the top
+    show_logo()
 
     st.title("Login")
 
@@ -33,7 +49,6 @@ def login_page():
                 st.session_state["user_id"] = user["user_id"]
                 st.session_state["username"] = user["username"]
                 st.success("Logged in successfully!")
-                # Optionally jump to Main page if you wish
             else:
                 st.error("Invalid username or password.")
         else:
